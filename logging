@@ -1,9 +1,10 @@
 Two services handle "syslog" messages:
-1) "systemd-journal" daemon :collects messages from various sources
+1) "systemd-journald" daemon :collects messages from various sources
 2) "Rsyslog" service :sorts messages by type and priority
 ^
-/etc/rsyslog.conf :central location where rsyslog is configurated
+/etc/rsyslog.conf :central location where rsyslog is configurated. this file is used to specify what should be logged and where it should be logged
 /etc/rsyslog.d
+/etc/sysconfig/rsyslog
 
 /var/log :stores the log messages
 /var/log/messages :all syslog messages except the following
@@ -15,3 +16,9 @@ Two services handle "syslog" messages:
 $ journalctl :detailed information from the journal
 $ tail -f <logfile> :real time log 
 $ logger :write messages to a log file
+
+- Facility :specifies a CATEGORY of information
+- Priority :used to define the SEVERITY of the message thats needs to be logged
+- Destination :defines WHERE the message should be written
+
+
