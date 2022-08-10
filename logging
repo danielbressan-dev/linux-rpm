@@ -17,6 +17,8 @@ $ journalctl :detailed information from the journal
 $ tail -f <logfile> :real time log 
 $ logger :write messages to a log file
 
+
+List of facilities and priorities $ man 5 rsyslog.conf
 - Facility :specifies a CATEGORY of information
 - Priority :used to define the SEVERITY of the message thats needs to be logged
 - Destination :defines WHERE the message should be written
