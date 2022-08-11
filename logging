@@ -31,7 +31,7 @@ $ journalctl -p err :provides err messages only
 $ journalctl -f :live view log file mode
 $ journalctl --dmesg $ dmesg :kernel-related messages only
 $ tail -f <logfile> :real time log 
-$ logger :write messages to a log file
+$ logger :write messages to a log file $ logger -p <facility.priority> <message>
 
 
 List of facilities and priorities $ man 5 rsyslog.conf
