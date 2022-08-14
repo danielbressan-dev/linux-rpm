@@ -6,6 +6,7 @@ Two services handle "syslog" messages:
 
 /etc/rsyslog.conf :central location where rsyslog is configurated. this file is used to specify what should be logged and where it should be logged
 # file config syntax: "<facility>.<priority> <destination>" 
+# write only (=) messages with specified priority ex: cron.=debug /var/log/cron.debug
 
 /etc/rsyslog.d
 /etc/sysconfig/rsyslog
@@ -24,12 +25,13 @@ Two services handle "syslog" messages:
 
 
 * COMMANDS *
-
+obs: some options are shared between tail command and journalctl.
 $ journalctl :detailed information from the journal
 $ journalctl -o verbose : options that provides detailed information for all items that have been logged
 $ journalctl -p err :provides err messages only
 $ journalctl -f :live view log file mode
 $ journalctl --dmesg $ dmesg :kernel-related messages only
+$ journalctl --since --until : filter by time. format: YYYY-MM-DD hh:mm:ss
 $ tail -f <logfile> :real time log 
 $ logger :write messages to a log file $ logger -p <facility.priority> <message>
 
