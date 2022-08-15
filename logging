@@ -41,9 +41,6 @@ List of facilities and priorities $ man 5 rsyslog.conf
 - Priority :used to define the SEVERITY of the message thats needs to be logged
 - Destination :defines WHERE the message should be written
 
-# Rotating Log Files 
-/etc/logrotate.conf :default setting for rotation
-/etc/logrotate.d :create specific setting for log files, overwrites logrotate.conf
 
 
 
