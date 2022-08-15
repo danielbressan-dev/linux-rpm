@@ -1,6 +1,50 @@
-* COMMANDS *
 
 $ lsblk :show disks
 
-$ fdisk <device-disk-name> :tool used to create MBR partition
+1) * MANAGE PARTITIONS *
+
+> FDISK tool
+
+$ fdisk /dev/<disk-name> :tool used to create MBR partitions.
+$ fdisk -l /dev/<disk-name> :show disks in a way that can be compared to kernel partition table in /proc/partitions
+
+$ cat /proc/partitions :shows de kernel partition table.
+$ partprobe /dev/<disk-name> :write partitions changes to the kernel partition table.
+
+> GDISK tool
+
+# never use gdisk on a disk that has been formated with fdisk and already contain fdisk partitions.
+
+$ gdisk /dev/<disk-name> :tool used to create GTP partitions.
+$ partprobe /dev/<disk-name>
+
+Relevant partition Types
+- 8200 :Linux swap
+- 8300 :Linux file system
+- 8e00 :Linux LVM
+
+> PARTED tool
+$ parted /dev/<disk-name> :utility that can be used to create partitions and lacks support for advanced features
+
+2) * CREATE FILE SYSTEM *
+
+$ mkfs -t <file-system-format> /dev/<disk-partition-name> :format disk on specified (-t) format. 
+# if option "t" isn't specified an "Ext2" file system will be formatted.
+
+$ mkfs.<file-system-format> /dev/<disk-partition-name> :same as above but with different syntax.
+
+$ mkswap /dev/<swap-disk-name> :format partition as swap space.
+$ swapon /dev/<swap-disk-name> :activate swap memory.
+
+* File System PROPERTIES *
+# properties are specific for the file system format you are using, so different systems different tools.
+
+> Ext4 tool
+$ tune2fs /dev/<disk-partition-name> :generic tool for managing Ext4 file system properties.
+$ tune2fs -l /dev/<disk-partition-name> :list properties
+$ tune2fs -L /dev/<disk-partition-name> :set a label on the file system
+# for more configuration see rhcsa book chapter 14
+
+> XFS tool
+$ xfs_admin -L <desired-label> <device-partition-name> :set a file system label, which allows the file system to be mounted in a consistent way.
 
