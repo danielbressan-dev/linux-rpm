@@ -33,9 +33,6 @@ $ mkfs -t <file-system-format> /dev/<disk-partition-name> :format disk on specif
 
 $ mkfs.<file-system-format> /dev/<disk-partition-name> :same as above but with different syntax.
 
-$ mkswap /dev/<swap-disk-name> :format partition as swap space.
-$ swapon /dev/<swap-disk-name> :activate swap memory.
-
 * File System PROPERTIES *
 # properties are specific for the file system format you are using, so different systems different tools.
 
@@ -47,4 +44,18 @@ $ tune2fs -L /dev/<disk-partition-name> :set a label on the file system
 
 > XFS tool
 $ xfs_admin -L <desired-label> <device-partition-name> :set a file system label, which allows the file system to be mounted in a consistent way.
+
+* Adding SWAP Partitions *
+
+$ mkswap /dev/<swap-disk-name> :format partition as swap space.
+$ swapon /dev/<swap-disk-name> :activate swap memory.
+
+> Swap Files
+$ dd if=/dev/zero of=/<swapfile-name> bs=1M count=100
+$ mkswap /<swapfile-name> :mark file as swap file.
+$ swapon /<swapfile-name> :activate it.
+
+
+
+
 
