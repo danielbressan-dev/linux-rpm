@@ -1,0 +1,6 @@
+* COMMANDS *
+
+$ lsblk :show disks
+
+$ fdisk <device-disk-name> :tool used to create MBR partition
+
