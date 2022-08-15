@@ -8,9 +8,9 @@ Two services handle "syslog" messages:
 # file config syntax: "<facility>.<priority> <destination>" 
 # write only (=) messages with specified priority ex: cron.=debug /var/log/cron.debug
 
-/etc/rsyslog.d
-/etc/sysconfig/rsyslog
-/etc/systemd/journald.conf 
+/etc/sysconfig/rsyslog :configure specific options to be passed to the rsyslogd service on startup
+/etc/rsyslog.d :included at /etc/rsyslog.conf
+/etc/systemd/journald.conf :journald configuration file
 
 /var/log :stores the log messages
 /var/log/messages :all syslog messages except the following
@@ -18,7 +18,10 @@ Two services handle "syslog" messages:
 /var/log/maillog :mail server-related messages and errors
 /var/log/cron :log files related to periodically executed tasks
 /var/log/boot.log :log files related to system startup
+
+/var/log/journal :must exist to make the journal persistent
 /run/log/journal :binary file that stores log messages in the journal
+
 # Rotating Log Files 
 /etc/logrotate.conf :default setting for rotation
 /etc/logrotate.d :create specific setting for log files, overwrites logrotate.conf
@@ -30,6 +33,7 @@ $ journalctl :detailed information from the journal
 $ journalctl -o verbose : options that provides detailed information for all items that have been logged
 $ journalctl -p err :provides err messages only
 $ journalctl -f :live view log file mode
+$ journalctl -b :show log messages since last reboot
 $ journalctl --dmesg $ dmesg :kernel-related messages only
 $ journalctl --since --until : filter by time. format: YYYY-MM-DD hh:mm:ss
 $ tail -f <logfile> :real time log 
