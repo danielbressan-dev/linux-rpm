@@ -1,5 +1,17 @@
+SCHEME:
+
+1° Create partition: fdisk for MBR or gdisk for GPT
+2° Create File System: mkfs.<type>
+3° Create dir to mount
+4° Configure /etc/fstab file
+5° $ systemctl daemon-reload
+6° $ mount -a 
+7° $ df -h :verify that the partition has been mounted correctly
 
 $ lsblk :show disks
+$ blkid :overview of current file systems and their UUID's
+$ df -hT :sho:w disk file systems in human readable format (-h) with type (-T) specified
+$ parted -l :show partition table, BUT with specified partition type
 
 1) * MANAGE PARTITIONS *
 
@@ -54,6 +66,16 @@ $ swapon /dev/<swap-disk-name> :activate swap memory.
 $ dd if=/dev/zero of=/<swapfile-name> bs=1M count=100
 $ mkswap /<swapfile-name> :mark file as swap file.
 $ swapon /<swapfile-name> :activate it.
+
+* MOUNTing File Systems *
+
+$ blkid :overview of current file systems and their UUID's
+
+$ mount <what> <where> 
+$ unmount <what> 
+or
+$ unmount <where>
+
 
 
 
