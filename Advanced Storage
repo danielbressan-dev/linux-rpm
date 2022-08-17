@@ -1,6 +1,28 @@
 * Concepts *
 
-- Storage Device :is a physical volume
-- Volume Group :is the abstraction of all available storage
-- Logical Volume :may consist of available storage from multiple physical volumes
-- LVM Architecture : disk (converted into Physical Volumes-"PVs") > volume group > logical volume > file system
+- Storage Device :is a physical volume.
+- Volume Group :is the abstraction of all available storage.
+- Logical Volume :may consist of available storage from multiple physical volumes.
+- LVM Architecture : disk (converted into Physical Volumes-"PVs") > volume group > logical volume > file system.
+
+* Commands *
+
+$ fdisk $ gdisk $ parted :to mark partitions as LVM (8e-MBR/8e00-GPT). this is not required if you are assigning the whole disk to the VG.
+
+$ pvcreate </dev/disk-name> :create physical volume
+$ pvs </dev/disk-name> :show physical volumes.
+$ pvdisplay </dev/disk-name> :show physical volumes with their properties.
+$ pvremove :removes the physical volume signature from a block device.
+
+$ vgcreate <volume-group-name> </dev/disk-name> :creates vg and add specified device to it
+# dont´t nedd to mark as LVM partition if you are adding a complete disk.
+$
+$ vgdisplay :shows information about volume groups.
+$ vgremove :removes a volume group.
+
+$ lvcreate -n <lvname> -L <size in absolute numbers> <volume group name> :creates a logical volume with specified name and size.
+$ lvs :show summary of all available logical volumes.
+$ lvdisplay :shows a detailed list of available logical volumes and their properties.
+$ lvremove :removes a logical volume.
+
+
