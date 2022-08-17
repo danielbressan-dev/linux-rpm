@@ -1,0 +1,6 @@
+* Concepts *
+
+- Storage Device :is a physical volume
+- Volume Group :is the abstraction of all available storage
+- Logical Volume :may consist of available storage from multiple physical volumes
+- LVM Architecture : disk (converted into Physical Volumes-"PVs") > volume group > logical volume > file system
