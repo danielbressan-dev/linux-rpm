@@ -34,6 +34,8 @@ $ lvresize -r -l + 75% FREE /dev/vgdata/lvdata :adds 75% of all free disk space 
 $ lvresize -r -l 75% FREE /dev/vgdata/lvdata :resizes the logical volume to a total size that equals 75% of the amount of free disk space. (Notice the difference with the previous command.)
 $ lvresize -L + 1G -r /dev/vgdata/lvdata :The easiest and most intuitive way to do a resize.
 
+* STRATIS *
+
 
 
 
