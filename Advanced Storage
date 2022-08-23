@@ -35,6 +35,20 @@ $ lvresize -r -l 75% FREE /dev/vgdata/lvdata :resizes the logical volume to a to
 $ lvresize -L + 1G -r /dev/vgdata/lvdata :The easiest and most intuitive way to do a resize.
 
 * STRATIS *
+ 
+ $ stratis blockdev :shows information about all block devices that are used for stratis.
+ $ stratis pool list:gives information about Stratis Pool. "used" should not come to close the Physical Size parameter.
+ $ stratis filesystem :enable you to monitor individual file systems.
+ $ stratis fs list <mypool> :list file systems within the pool.
+ 
+ $ stratis pool create <pool-name> <block-device> :create a stratis pool.
+ $ stratis fs create <pool-name> <filesystem-name> : create a stratis filesystem.
+ 
+# mounting 
+1° get Stratis Filesystem UUID output from $stratis fs list. not the Block Device UUID from $lsblk
+2° mount through /etc/fstab
+3° include the mount option "defaults,x-systemd.requires=stratisd.service"
+
 
 
 
