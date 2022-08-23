@@ -45,9 +45,11 @@ $ lvresize -L + 1G -r /dev/vgdata/lvdata :The easiest and most intuitive way to 
  $ stratis fs create <pool-name> <filesystem-name> : create a stratis filesystem.
  
 # mounting 
-1° get Stratis Filesystem UUID output from $stratis fs list. not the Block Device UUID from $lsblk
+1° get Stratis Filesystem UUID output from $stratis fs list. NOT the Block Device UUID from $lsblk
 2° mount through /etc/fstab
 3° include the mount option "defaults,x-systemd.requires=stratisd.service"
+
+ $ stratis filesystem snapshot <pool-name> <fs-name> <snapshot-name> :create snapshot that will be stored in /dev/stratis/<pool-name>
 
 
 
