@@ -17,7 +17,7 @@ $ pvremove :removes the physical volume signature from a block device.
 $ vgcreate <volume-group-name> </dev/disk-name> :creates vg and add specified device to it
 # dont´t nedd to mark as LVM partition if you are adding a complete disk.
 $ vgs :shows volume groups
-$ vgdisplay :shows information about volume groups.
+$ vgdisplay :shows information about volume groups
 $ vgremove :removes a volume group.
 $ vgextend <VG-name-to-be-extended> <disk-name-to-be-added>
 
@@ -57,6 +57,12 @@ $ lvresize -L + 1G -r /dev/vgdata/lvdata :The easiest and most intuitive way to 
 3° Create pool
 4° Create stratis filesystem
 5° Mount through /etc/fstab 
+
+* VDO * rhel8 is different than rhel9. vdo is integrated with
+
+$ dnf install -y vdo kmod-kvdo
+
+$ vgcreate <vdo-volume-name> /dev/<device-name> :create volume group for vdo
 
 
 
