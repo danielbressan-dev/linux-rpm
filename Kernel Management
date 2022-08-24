@@ -1,0 +1,18 @@
+> Hardware Inicialization Process
+
+1° Kernel probes hardware;
+2° systemd-udevd loads required drivers;
+3° udevd reads rules files in /usr/lib/udev/rules.d (do not change this files);
+4° udevd reads custom rules in /etc/udev/rules.d ;
+5° kernel modules are loaded and status about kernel and hardware are written to the sysfs file system, mounted /sys . which is a kind of pseudo file system
+
+/proc :interface to the linux kernel. contains files with detail status information about what is happening on your server
+
+* Commands *
+
+$ ps aux :shows kernel threads.
+$ dmesg :shows contents of the kernel ring buffer, where linux kernel keeps its recents log messages.
+$ journalctl --dmesg :same as above but with different format.
+$ jounal ctl -K :same as above but with different format.
+$ uname -a :overview of relevant parameters
+$ uname -r :show which kernel version is in use
