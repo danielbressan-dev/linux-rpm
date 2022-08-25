@@ -1,0 +1,30 @@
+* Targets that can run in isolated mode *
+
+# roughly relatable with old runlevels
+
+- poweroff.target     :runlevel 0
+- rescue.target       :runlevel 1
+- multi-user.target   :runlevel 3
+- graphical.target    :runlevel 5
+- reboot.target       :runlevel 6
+
+* Configuration files and docs *
+
+/etc/systemd/system :has a subdirectory for every target, containing wants as symbolic links for specific services that are to be started.
+/usr/lib/systemd/system :where target unit files are originally located. also where links are generated from.
+
+/etc/dafault/grub :GRUB 2 configuration file. it is through here that you make modifications that are applied to the end file.
+/boot/efi/EFI/redhat :final configuration file on UEFI systems. Do not edit, these file is automatically generated. 
+/boot/grub2/grub.cfg :final configuration file on BIOS systems. Do not edit, these file is automatically generated.
+
+$ man 7 bootparam :contains descriptions about all boot parameters that you may use.
+
+* Commands *
+
+$ systemctl --type=target :shows list of loaded targets. 
+$ systemctl get-default :display current default target
+$ systemctl set-default <target-name> :set default target.
+
+$ grub2-mkconfig > /boot/grub2/grub.cfg :write configurations to the final GRUB2 file. chose the right path based on you system type (UEFI or BIOS).
+
+
