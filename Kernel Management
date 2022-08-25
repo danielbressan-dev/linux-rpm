@@ -29,3 +29,7 @@ $ modprobe <module-name> :loads kernel module, including their dependencies.
 $ modprobe -r <module-name> :unloads kernel module, considering their dependencies.
 $ lspci :shows all hardware devices that have been detected on the pci bus.
 $ lspci -k :list al kernel modules that are used for the pci devices that were detected
+
+* Load Modules with specific parameters *
+
+# create a .conf file at /etc/modprobe.d
