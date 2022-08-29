@@ -1,0 +1,12 @@
+* Configuration Files *
+
+/etc/profile :This is the generic file that is processed by all users upon login. 
+/etc/bashrc :This file is processed when subshells are started. 
+~/.bash_profile :In this file, user-specific login shell variables can be defined. 
+~/.bashrc :In this user-specific file, subshell variables can be defined.
+
+
+LANG=es_ES.UTF-8 :This temporarily sets the language variable to Spanish.
+
+
+
