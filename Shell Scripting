@@ -1,0 +1,31 @@
+* Basic Script Elements *
+
+- #! shebang :specifie how a script should be interpreted.
+- # comment lines :helps maintenance of the code.
+- exit statemant
+
+
+* Commands *
+
+$ echo $? :request exit status of the last command. "0" means the script was successful.
+
+
+* Positional Parameters *
+
+$# :a counter that shows how many arguments were used when starting the script.
+$@ :refers to all arguments that were used when starting the script.
+$1 :refers to 1° argument.
+$2 :refers to 2° argument.
+
+* Conditional Loops *
+
+if … then … else :Used to execute codes if a specific condition is true.
+for :used to execute commands for a range of values.
+while :used to execute a code as long as a specific condition is true.
+until :used to execute code until a specific condition is true.
+case :used to evaluate specific values, where beforehand a limited number of values is expected.
+
+* Variables *
+
+VARIABLE=$(command) :use the result of a command as input to script variable
+
