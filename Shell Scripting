@@ -16,6 +16,8 @@ $# :a counter that shows how many arguments were used when starting the script.
 $@ :refers to all arguments that were used when starting the script.
 $1 :refers to 1° argument.
 $2 :refers to 2° argument.
+i :each.
+@i :each argument.
 
 * Conditional Loops *
 
