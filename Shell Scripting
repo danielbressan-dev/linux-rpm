@@ -4,11 +4,10 @@
 - # comment lines :helps maintenance of the code.
 - exit statemant
 
-
 * Commands *
 
 $ echo $? :request exit status of the last command. "0" means the script was successful.
-
+$ bash -x <script> :troubleshoot a script. show what's happening line by line.
 
 * Positional Parameters *
 
@@ -19,7 +18,7 @@ $2 :refers to 2° argument.
 i :each.
 @i :each argument.
 
-* Conditional Loops *
+* Conditional/Itineration Loops *
 
 if … then … else :Used to execute codes if a specific condition is true.
 for :used to execute commands for a range of values.
@@ -27,7 +26,13 @@ while :used to execute a code as long as a specific condition is true.
 until :used to execute code until a specific condition is true.
 case :used to evaluate specific values, where beforehand a limited number of values is expected.
 
-* Variables *
+* Assign value to a variable *
 
-VARIABLE=$(command) :use the result of a command as input to script variable
+- statically: NAME=value
+
+- dynamically:
+1) $ read :waits for user input
+2) command substitution : NAME=$(command)
+
+
 
