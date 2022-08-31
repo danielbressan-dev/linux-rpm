@@ -20,7 +20,7 @@ i :each.
 
 * Conditional/Itineration Loops *
 
-if … then … else :Used to execute codes if a specific condition is true.
+if ... then ... else ... fi :Used to execute codes if a specific condition is true.
 for :used to execute commands for a range of values.
 while :used to execute a code as long as a specific condition is true.
 until :used to execute code until a specific condition is true.
