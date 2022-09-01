@@ -1,0 +1,6 @@
+* Measures to protect SSh servers *
+
+- Disable root login
+- Disable password login
+- Configure a nondefault port for SSH to listen on 
+- Allow specific users only to log in on SSH
