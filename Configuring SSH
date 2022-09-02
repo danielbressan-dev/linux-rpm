@@ -1,11 +1,13 @@
-
-
 * Commands *
 
 $ ssh <user>@<ip-address> :connect to host.
 $ ssh-keygen :generates authentication key pair.
 $ ssh-copy-id <server2> :copy public key to the server that you want to connect.
 
+$ semanage port -l :list ports and labels.
+$ semanage port -a -t ssh_port_t -p tcp <port-number> :label port. more info $man semanage port
+$ semanage port -m :modify the current port assign.
+_________________________________________________________________________________________________________
 
 * Config files/directories *
 
@@ -15,13 +17,24 @@ $ ssh-copy-id <server2> :copy public key to the server that you want to connect.
 /home/<user>/.ssh/authorized_keys :where public keys are stored to allow other servers to connect in.
 /etc/ssh/ssh_config :general configuration file.
 /etc/hosts :DNS name resolution (not enough to connect with internet).
+/var/log/secure :where AUTHPRIV syslog facility writes, and ssh failed logs are included.
+___________________________________________________________________________________________________________
 
 * Measures to protect SSH servers *
 # after any modification $systemctl restart sshd
+# ssh writes log information about failed login attempts to the AUTHPRIV syslog facility. By default this facility writes on /var/log/secure
+
+- Disable password login: generate public/private key pair with $ssh-keygen and copy to client through $ssh-copy-id <user>@<server>
 
 - Disable root login: modify "PermitRootLogin" parameter in /etc/ssh/sshd_config
-- Configure a nondefault port for SSH to listen on
 
+- Configure a nondefault port for SSH to listen on: 
+  1) SELinux labels port for security, so you need label the new assigned port
+     $ semanage port -a -t ssh_port_t -p tcp <port-number> :label port. more info $man semanage port
+  2) create <file>.conf under /etc/ssh/sshd.config.d/ or modify parameter in /etc/ssh/sshd_config
+  3) open firewall for new port using two commands in a roll:
+     $ firewall-cmd --add-port=<port-number>/tcp
+     $ firewall-cmd --add-port=<port-number>/tcp --permanent
 
-- Disable password login
-- Allow specific users only to log in on SSH
+- Allow only specific users to log in with SSH: 
+   1) add the "AllowUsers" (it is not there by default) option under /etc/ssh/sshd_config.d/<file>.conf or /etc/ssh/sshd_config
