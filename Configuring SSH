@@ -1,6 +1,27 @@
-* Measures to protect SSh servers *
 
-- Disable root login
+
+* Commands *
+
+$ ssh <user>@<ip-address> :connect to host.
+$ ssh-keygen :generates authentication key pair.
+$ ssh-copy-id <server2> :copy public key to the server that you want to connect.
+
+
+* Config files/directories *
+
+~/.ssh/known_hosts :file where public key fingerprint is stored.
+~/.ssh/id_rsa :generated after $ssh-keygen. where the private key is stored.
+~/.ssh/id_rsa.pub :generated after $ssh-keygen. where the public key is stored.
+/home/<user>/.ssh/authorized_keys :where public keys are stored to allow other servers to connect in.
+/etc/ssh/ssh_config :general configuration file.
+/etc/hosts :DNS name resolution (not enough to connect with internet).
+
+* Measures to protect SSH servers *
+# after any modification $systemctl restart sshd
+
+- Disable root login: modify "PermitRootLogin" parameter in /etc/ssh/sshd_config
+- Configure a nondefault port for SSH to listen on
+
+
 - Disable password login
-- Configure a nondefault port for SSH to listen on 
 - Allow specific users only to log in on SSH
