@@ -1,0 +1,3 @@
+* Configuration directories/files *
+
+/etc/httpd/conf/httpd.conf :Apache main configuration file
