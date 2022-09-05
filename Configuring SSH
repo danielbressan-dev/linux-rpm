@@ -1,12 +1,21 @@
+
+obs: after any important change in configurations files, Firewall, port change in Selinux should be followed by a Systemctl restart commnand.
+__________________________________________________________________________________________________________
 * Commands *
 
 $ ssh <user>@<ip-address> :connect to host.
 $ ssh-keygen :generates authentication key pair.
 $ ssh-copy-id <server2> :copy public key to the server that you want to connect.
 
+$ ssh-agent /bin/bash :start agent to cache the created ssh passphrase for current (Bash) shell.
+$ ssh-add :add the passphrase for the current user's private key.
+
 $ semanage port -l :list ports and labels.
 $ semanage port -a -t ssh_port_t -p tcp <port-number> :label port. more info $man semanage port
 $ semanage port -m :modify the current port assign.
+
+$ firewall-cmd --add-port=<port-number>/tcp
+$ firewall-cmd --add-port=<port-number>/tcp --permanent
 _________________________________________________________________________________________________________
 * Config files/directories *
 
