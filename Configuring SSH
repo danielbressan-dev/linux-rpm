@@ -8,7 +8,6 @@ $ semanage port -l :list ports and labels.
 $ semanage port -a -t ssh_port_t -p tcp <port-number> :label port. more info $man semanage port
 $ semanage port -m :modify the current port assign.
 _________________________________________________________________________________________________________
-
 * Config files/directories *
 
 ~/.ssh/known_hosts :file where public key fingerprint is stored.
@@ -18,9 +17,9 @@ ________________________________________________________________________________
 /etc/ssh/ssh_config :general configuration file.
 /etc/hosts :DNS name resolution (not enough to connect with internet).
 /var/log/secure :where AUTHPRIV syslog facility writes, and ssh failed logs are included.
-___________________________________________________________________________________________________________
-
+_________________________________________________________________________________________________________
 * Measures to protect SSH servers *
+
 # after any modification $systemctl restart sshd
 # ssh writes log information about failed login attempts to the AUTHPRIV syslog facility. By default this facility writes on /var/log/secure
 
@@ -38,3 +37,24 @@ ________________________________________________________________________________
 
 - Allow only specific users to log in with SSH: 
    1) add the "AllowUsers" (it is not there by default) option under /etc/ssh/sshd_config.d/<file>.conf or /etc/ssh/sshd_config
+__________________________________________________________________________________________________________
+* Sessions Options *
+
+- Port :Defines the TCP listening port.
+- PermitRootLogin :Indicates whether to allow or disallow root login.
+- MaxAuthTries :Specifies the maximum number of authentication tries. After reaching half of this number, failures are logged to syslog.
+- MaxSessions :Indicates the maximum number of sessions that can be open from one IP address.
+- AllowUsers :Specifies a space-separated list of users who are allowed to connect to the server.
+- PasswordAuthentication :Specifies whether to allow password authentication. This option is on by default.
+- GSSAPIAuthentication :Indicates whether authentication through the GSSAPI needs to be enabled. Used for Kerberos-based authentication.
+- TCPKeepAlive :Specifies whether or not to clean up inactive TCP connections.
+- ClientAliveInterval :Specifies the interval, in seconds, that packets are sent to the client to figure out if the client is still alive.
+- ClientAliveCountMax :Specifies the number of client alive packets that need to be sent.
+- UseDNS :If on, uses DNS name lookup to match incoming IP addresses to names.
+- ServerAliveInterval :Specifies the interval, in seconds, that a client sends a packet to a server to keep connections alive.
+- ServerAliveCountMax :Specifies the maximum number of packets a client sends to a server to keep connections alive.
+
+
+
+
+
