@@ -1,5 +1,9 @@
 
 obs: after any important change in configurations files, Firewall, port change in Selinux should be followed by a Systemctl restart commnand.
+
+$ firewall-cmd --reload
+$ systemctl restart sshd
+$ systemctl daemon-reload
 __________________________________________________________________________________________________________
 * Commands *
 
@@ -16,6 +20,7 @@ $ semanage port -m :modify the current port assign.
 
 $ firewall-cmd --add-port=<port-number>/tcp
 $ firewall-cmd --add-port=<port-number>/tcp --permanent
+
 _________________________________________________________________________________________________________
 * Config files/directories *
 
@@ -26,6 +31,7 @@ ________________________________________________________________________________
 /etc/ssh/ssh_config :general configuration file.
 /etc/hosts :DNS name resolution (not enough to connect with internet).
 /var/log/secure :where AUTHPRIV syslog facility writes, and ssh failed logs are included.
+
 _________________________________________________________________________________________________________
 * Measures to protect SSH servers *
 
@@ -46,6 +52,7 @@ ________________________________________________________________________________
 
 - Allow only specific users to log in with SSH: 
    1) add the "AllowUsers" (it is not there by default) option under /etc/ssh/sshd_config.d/<file>.conf or /etc/ssh/sshd_config
+   
 __________________________________________________________________________________________________________
 * Sessions Options *
 
