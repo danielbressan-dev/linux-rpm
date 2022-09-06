@@ -3,6 +3,6 @@
 /etc/httpd/conf/httpd.conf :contais the most important configuration parameters.
 /etc/httpd/conf :where the main configuration files are.
 /etc/httpd/conf.d :directory contains files that are included in the Apache main configuration file. 
-                   Makes possible to add specific conf that define the differente web pages.
+                   Makes possible to add specific configuration that define the differente web pages.
 /etc/httpd/conf.modules.d :modules configuration.                   
 
