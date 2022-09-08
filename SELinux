@@ -5,7 +5,7 @@ $ sepolicy manpage -a -p /usr/share/man/man8 :install SELinux man pages.
 $ mandb :update man database.
 $ man -k _selinux | grep http
 ------------------------------------
-$ dnf install -y setroubleshoot-server
+$ dnf install -y setroubleshoot-server :where Sealert tool binary is located.
 ------------------------------------
 $ dnf provides */semanage :search which rpm package has it's binary and install later.
 _________________________________________________________________________________
@@ -31,7 +31,7 @@ $ ss -Ztul :which shows all network ports and the current context label associat
 $ getsebool -a :get a list of Booleans on your system.
 $ semanage boolean -l :show current Boolean with more information, because it shows not only current Boolean but the default Boolean settings too.
 $ setsebool <boolean_name> <on/off> :change specific boolean, but it is not permanent.
-$ setsebool -P <boolean_name> <on/off> ::change specific boolean consistently. May take more time because parts of the policy needs to the recompiled.
+$ setsebool -P <boolean_name> <on/off> ::change specific boolean persistently. May take more time because parts of the policy needs to the recompiled.
 -------------------------------------------
 >> Reading log files <<
 # SELinux messages are logged with type=AVC in the audit log, so:
@@ -40,7 +40,7 @@ $ sealert :makes SELinux logs message more confortable to read. writes to syslog
 -------------------------------------------
 >> Updating type in context label <<
 $ semanage :writes new context to SELinux policy.
-1°) $ semanage -a -t <context_t> "/mydir(/.*)?" :set context type to any new directory. only writes to the policy: MUST be fallowed by the next command.
+1°) $ semanage fcontext -a -t <context_t> "/mydir(/.*)?" :set context type to any new directory. only writes to the policy: MUST be fallowed by the next command.
 2°) $ restorecon -R -v /mydir :apply the policy settings to file system to finish the context label process.
 
 $ chcon :this command should be avoided. writes the new context direct to the file system, jumping the policy. 
