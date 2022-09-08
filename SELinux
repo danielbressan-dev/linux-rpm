@@ -1,3 +1,11 @@
+* Installing SELinux-specific man pages *
+
+$ dnf install -y policycoreutils-devel
+$ sepolicy manpage -a -p /usr/share/man/man8 :install SELinux man pages.
+$ mandb :update man database.
+$ man -k _selinux | grep http
+
+_________________________________________________________________________________
 * Configuration files/directories *
 
 /var/log/audit/audit.log :log messages from SELinux.
@@ -10,23 +18,22 @@ ________________________________________________________________________________
 $ getenforce :get SELinux mode, "enforcing" or "permissive".
 $ setenforce 0 :set to "permissive" mode.
 $ setenforce 1 :set to "enforcing" mode.
-$ sestatus -v :
-
+$ sestatus -v :get system SELinux status, option verbose brings more information.
+------------------------------------------
 >See Context Labels<
 $ ls -Z :show context settings for some directories in the / file system.
 $ ps Zaux :shows a list of all process including their context label.
 $ ss -Ztul :which shows all network ports and the current context label associated with each port.
-
+-------------------------------------------
 >Updating type in context label<
 $ semanage :writes new context to SELinux policy.
 1°) $ semanage -a -t <context_t> "/mydir(/.*)?" :set context type to any new directory. only writes to the policy: MUST be fallowed by the next command.
 2°) $ restorecon -R -v /mydir :apply the policy settings to file system to finish the context label process.
 
->Install SELinux-specific man pages<
-$ dnf install -y policycoreutils-devel
-$ sepolicy manpage -a -p /usr/share/man/man8 :install SELinux man pages.
-$ mandb :update man database.
-$ man -k _selinux | grep http
-
 $ chcon :this command should be avoided. writes the new context direct to the file system, jumping the policy. 
 Everything made with $chcon is overwritten when file system is relabeled by the policy.
+-------------------------------------------
+$ restorecon -Rv :relable a filesytem recursively (-R) and verbose (-v)
+$ touch /.autorelabel :creates a file that indicates to system that he must relabel whole filesytem while next boot.
+
+
