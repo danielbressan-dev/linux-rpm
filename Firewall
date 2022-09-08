@@ -1,0 +1,21 @@
+"In essence working with Firewalld is that the right services need to added to the right zones."
+
+* Commands *
+ 
+$ firewall-cmd --get-services :list all available firewalld services.
+$ firewall-cmd --get-default-zone :shows the current default zone.
+$ firewall-cmd --get-zones :see which zones are available.
+$ firewall-cmd --get-<item> :request information about a specific available item.
+
+$ firewall-cmd --list-all :see which services are available in the current zone.
+
+$ firewall-cmd --add-service <service-name> --permanent :add a service persistently. need to  reload or restart the Firewalld $systemctl restart firewalld.
+$ firewall-cmd --reload :reload configuration instead of restart.
+$ firewall-cmd --add-port=2020/tcp --permanent :add port 2020 to the firewalld configuration.
+___________________________________________________________________
+
+* Configuration XML files/dir *
+"behind each service is an XML configuration file"
+
+/usr/lib/firewalld/services :where XML configuration files are stored.
+/etc/firewalld/services :where custom files can be added.
