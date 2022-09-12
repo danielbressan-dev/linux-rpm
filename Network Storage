@@ -1,0 +1,78 @@
+obs: everything must be set as root
+________________________________________________________________________________________
+
+* SETTING UP NFS SERVCICES *
+
+> Offering an NfS Share (server side) <
+
+1) Create a local directory you want to share.
+2) Edit the /etc/exports file to define the NFS share.
+3) Start the NFS server.
+4) Configure your firewall to allow incoming NFS traffic. (services: nfs, rpc-bind, mountd)
+
+> Discovering and Mounting a NFS share (client side) <
+
+to be completed
+________________________________________________________________________________________
+
+* SETTING UP A CIFS SERVICES *
+
+> Offering an SAMBA/CIFS/SMB share (server side) <
+
+1) Create o local directory you want to share.
+2) Change /sambashare SELinux context to "public_content_t
+3) Change /sambashare permissions to RWX (770), and group owner to give access.
+4) Install Samba and configure it through /etc/samba/smb.conf
+                                                         add:
+                                                              [sambashare]
+                                                              comment = <sambashare>
+                                                              read only = No
+                                                              path = <path-to-samba-dir>
+5) Enable the smb.service and open (add samba service) firewall.
+6) Add samba-user credentials to a existing user.
+
+> Discovering and Mounting SMB shares (client side) <
+
+1) Install "cifs-utils" and "samba-client"
+2) List available shares on the specified server ($smbclient)
+3) Mount the /sambashare as guest on the /mnt directory and verify.
+__________________________________________________________________________________________
+
+* MOUNTING THROUGH FSTAB *
+
+> NFS shares <
+- add line to /etc/fstab
+                          <server-name>:/<share-name-dir> /nfs-mount-point nfs sync 0 0 
+
+> SAMBA shares < 
+(not a good idea to put username-password in clear text like the example mount line)
+- add the line to /etc/fstab
+                             //<server-name>/<share-name-dir> /samba-mount-point cifs username=<authenticated-user-name>,password=<password> 0 0
+
+________________________________________________________________________________________________________________________________________________
+
+* MOUNTING THROUGH AUTOMOUNT *
+
+> NFS <
+
+1) Install "autofs"
+2) Get a list of exports offered ($showmount).
+3) Edit the master configuration file. Indentify mountpoint and the name of the secondary file.
+   Add the line to /etc/auto.master
+                                    /<export-path-name> /etc/auto.<export-path-name>
+                               ex:  /nfsdata /etc/auto.nfsdata  
+                               
+4) In the secondary file add name of subdirectory that will be created in the mount point directory as a relative filename.
+   Add the line to /etc/auto.nfsdata 
+                                     files -rw server2:/nfsdata
+
+5) Enable autofs.service
+6) $ cd /nfsdata/files :to get access to the /nfsdata directory.
+_________________________________________________________________________________________________________________________________________________
+
+* COMMANDS *
+
+$ showmount -e <server-name> :show NFS exports offered by determined server.
+$ smbpasswd -a <user-name> :add samba credentials to a specific user.
+$ smbclient -L <server-name/ip-address> :list available shares on the specified server.
+$ mount -t cifs -o username=lisa //<server-name>/sambashare /mnt :mount the /sambashare as guest on the /mnt directory. type $mount to verify.
