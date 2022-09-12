@@ -28,8 +28,11 @@ ________________________________________________________________________________
 ~/.ssh/id_rsa :generated after $ssh-keygen. where the private key is stored.
 ~/.ssh/id_rsa.pub :generated after $ssh-keygen. where the public key is stored.
 /home/<user>/.ssh/authorized_keys :where public keys are stored to allow other servers to connect in.
+
 /etc/ssh/ssh_config :general configuration file.
+/etc/ssh/sshd_config.d :where custom configurations can be made.
 /etc/hosts :DNS name resolution (not enough to connect with internet).
+
 /var/log/secure :where AUTHPRIV syslog facility writes, and ssh failed logs are included.
 
 _________________________________________________________________________________________________________
