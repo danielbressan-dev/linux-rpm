@@ -1,0 +1,8 @@
+*   COMMANDS *
+
+$ usermod -aG <group-name> <user-name> :add user to a group. -a add (appends), -G specify group name.
+
+$ groupadd <group-name> :creates a group.
+$ groupmems -g <group-name> -l :shows members of a group. -g defines name of group, -l lists.
+__________________________________________________________________________________________________________
+
