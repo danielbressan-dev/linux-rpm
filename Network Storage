@@ -5,10 +5,12 @@ ________________________________________________________________________________
 
 > Offering an NfS Share (server side) <
 
-1) Create a local directory you want to share.
-2) Edit the /etc/exports file to define the NFS share.
-3) Start the NFS server.
-4) Configure your firewall to allow incoming NFS traffic. (services: nfs, rpc-bind, mountd)
+1) Install "nfs-utils"
+2) Create a local directory you want to share.
+3) Edit the /etc/exports file to define the NFS share. add:
+                                                            /<shared-dir> *(rw,no_root_squash)
+4) Start the NFS server.
+5) Configure your firewall to allow incoming NFS traffic. (services: nfs, rpc-bind, mountd)
 
 > Discovering and Mounting a NFS share (client side) <
 
@@ -70,9 +72,25 @@ ________________________________________________________________________________
 6) $ cd /nfsdata/files :to get access to the /nfsdata directory.
 _________________________________________________________________________________________________________________________________________________
 
+* AUTOMOUNT WITH WILDCARDS *
+
+1) Configure the /etc/auto.master
+2) Create secondary file, add the line:
+                                         *  -rw server2:/users/&
+3) Restart "autofs.service"
+4) $ cd /users/user1 :to access the share.
+                                      
+
+________________________________________________________________________________________________________________________________________________
 * COMMANDS *
 
 $ showmount -e <server-name> :show NFS exports offered by determined server.
 $ smbpasswd -a <user-name> :add samba credentials to a specific user.
 $ smbclient -L <server-name/ip-address> :list available shares on the specified server.
 $ mount -t cifs -o username=lisa //<server-name>/sambashare /mnt :mount the /sambashare as guest on the /mnt directory. type $mount to verify.
+_________________________________________________________________________________________________________________________________________________
+
+* DIRECTORIES/FILES *
+
+/etc/auto.master :master configuration for nfs.
+/etc/auto.<expot-name> :custom configuration file that must be created.
