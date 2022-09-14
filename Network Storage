@@ -14,7 +14,7 @@ ________________________________________________________________________________
 
 > Discovering and Mounting a NFS share (client side) <
 
-to be completed
+to be completed.
 ________________________________________________________________________________________
 
 * SETTING UP A CIFS SERVICES *
@@ -78,7 +78,7 @@ ________________________________________________________________________________
 2) Create secondary file, add the line:
                                          *  -rw server2:/users/&
 3) Restart "autofs.service"
-4) $ cd /users/user1 :to access the share.
+4) acces share through the mount directory.
                                       
 
 ________________________________________________________________________________________________________________________________________________
