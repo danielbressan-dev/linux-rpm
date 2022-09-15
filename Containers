@@ -1,0 +1,33 @@
+obs: must have the module "container-tools"
+______________________________________________________________________
+
+* COMMANDS *
+
+$ podman pull :store the imagem without runnig. more secure because you can inspect before running it.
+$ podman run <image> :run container.
+$ podman run -d <image> :run container in detached mode (background).
+$ podman run -it <image> :run in TTY (interactive) mode. type "exit" to shut down the container or "ctrl+p/ctrl+q".
+$ podman stop <container_name/id> :stop runnig.
+$ podman rmi :remove containers image. 
+$ podman exec <command> <image> :run other commands inside the container ass well
+
+$ podman ps :overview of currently runnig containers.
+$ podman ps -a :overview of currently runnig containers, including inactives.
+$ podman info :see which registries are currently used
+
+$ podman search <image-name> :find images you need.
+$ podman search --no-trunc <image-name> :presents a complete description.
+
+$ podman login registry.access.redhat.com :access images from Red Hat Registries.
+$ podman login registry.redhat.io :access images from Red Hat Registries.
+
+$ skopeo inspect :inspect images directly from the registry without any need to first pull the image.
+$ podman inspect :works only on images that are available on your local system, but gives more detailed infos.
+$ podman images :list images that are locally available
+__________________________________________________________________________
+
+* DIR/FILE *
+
+~/.local/share/containers/storage :containers files are copied to here when you run non-root containers.
+/etc/containers/registries.conf :specifies containers registries to be fetched.
+~/.config/containers/registries.conf :can be created by non-root users to override main config file.
