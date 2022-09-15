@@ -1,0 +1,21 @@
+* COMMANDS *
+
+$ date :shows the current system time.
+$ date +%d-%m-%y :shows the current system Day of month, Month and Year.
+$ date -s 14:55 :sets the current time to 14:55.
+
+$ hwclock :shows hardware clock.
+$ hwclock --systohc :synchronizes current system time to the hardware clock.
+$ hwclock --hctosys :synchronizes current hardware time to the system clock.
+
+$ timedatectl :shows the current time settings.
+$ timedatectl status :show current time setting differently.
+$ timedatectl list-timezones :list all time zones.
+$ timedatectl set-timezone <time-zone> :set a new time zone.
+$ timedatectl set-ntp <0/1> :set NTP server, boolean 1=on and 0=off.
+_________________________________
+
+* CONFIGURATION DIR/FILES *
+
+/etc/chrony.conf :file that can be configured with a standart list of NTP servers.
+/var/log
