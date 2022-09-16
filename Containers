@@ -8,18 +8,21 @@ $ podman run <image> :run container.
 $ podman run -d <image> :run container in detached mode (background).
 $ podman run -it <image> :run in TTY (interactive) mode. type "exit" to shut down the container or "ctrl+p/ctrl+q".
 $ podman stop <container_name/id> :stop runnig.
+$ podman kill 
 $ podman rmi :remove containers image. 
+$ podman rm <container> :remove container file. add option -a to remove all files.
 $ podman exec <command> <image> :run other commands inside the container ass well
 $ podman run --name <name-you-give> -d -p <host-port>:<container-port> <container> :run container and expose it on host defined port. You must add this port to firewall.
 $ podman run -e <container-name> :"Managing Container Environment Variables. Put an option "-e" before every environment variable.
+$ podman start :start a container that is not currently runnnig.
 
 $ podman ps :overview of currently runnig containers.
 $ podman ps -a :overview of currently runnig containers, including inactives.
 $ podman info :see which registries are currently used
-
+^cat 
 $ skopeo inspect :inspect images directly from the registry without any need to first pull the image.
 $ podman inspect :works only on images that are available on your local system, but gives more detailed infos.
-$ podman images :list images that are locally available
+$ podman images :list images that are locally available. "pulled" images
 
 $ podman search <image-name> :find images you need.
 $ podman search --no-trunc <image-name> :presents a complete description.
@@ -32,6 +35,37 @@ __________________________________________________________________________
 
 * DIR/FILE *
 
-~/.local/share/containers/storage :containers files are copied to here when you run non-root containers.
 /etc/containers/registries.conf :specifies containers registries to be fetched.
+~/.local/share/containers/storage :containers files are copied to here when you run non-root containers.
 ~/.config/containers/registries.conf :can be created by non-root users to override main config file.
+__________________________________________________________________________
+
+* MANAGING CONTAINER STORAGE *
+
+to be completed
+___________________________________________________________________________
+
+* RUNNING CONTAINERS AS SYSTEMD SERVICES *
+
+1) Enable linger feature (rootless mode container)
+   $ sudo loginctl enable-linger <user>
+
+2) Login <user>
+   $ su <user>
+
+3) Create directory where containers file will be generated. this directory must be at <user> home
+   $ mkdir -p ~/.config/systemd/user
+   
+4) Start Container 
+   $ podman run -d --name <mynginx> -p <8081>:<80> <nginx>
+   
+5) Generate systemd unit file in existing dir ~/.config/systemd/user
+   $ podman generate systemd --name <mynginx> --files
+   move file to ~/.config/systemd/user
+
+6) Change the "WantedBy=default.target" in file container-<mynginx>.service 
+
+7) $ systemctl --user daemon-reload
+   $ systemctl --user enable container.<ngninx>.service 
+
+8) Reboot to see if it started automatically
