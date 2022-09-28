@@ -67,7 +67,7 @@ $ lvresize -L + 1G -r /dev/vgdata/lvdata :The easiest and most intuitive way to 
 
 * VDO * rhel8 is different than rhel9. vdo is integrated with lvm
 
-$ dnf install -y vdo kmod-kvdo
+$ dnf install -y lvm2 vdo kmod-kvdo
 
 1° Create volume group to provide storage for vdo
 $ vgcreate <vdo-volume-name> /dev/<device-name>
@@ -76,10 +76,11 @@ $ lvcreate --type vdo -n <vdo-lv-name> -l 100%FREE -V 50G <vdo-volume-group>
 3° Check details
 $ lvs -a
 4° Create a filesystem
-$ mkfs.xfs -K /dev/vdo/<path-to-logical-volume>
+$ mkfs.xfs -K /dev/<vdo>/<path-to-logical-volume>
+or
+$ maks.ext4 -E nodiscard /dev/vdo-vg/vdo-lv
 5° mkdir to mount
-6° mount through /etc/fstab, use UUID.
-
+6° mount through /etc/fstab
 
 
 
